@@ -1,0 +1,4 @@
+/home/vboxuser/path/to/au4level/build/CMakeFiles/au4level.dir
+/home/vboxuser/path/to/au4level/build/CMakeFiles/plots.dir
+/home/vboxuser/path/to/au4level/build/CMakeFiles/edit_cache.dir
+/home/vboxuser/path/to/au4level/build/CMakeFiles/rebuild_cache.dir

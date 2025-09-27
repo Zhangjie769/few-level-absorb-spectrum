@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/vboxuser/path/to/au4level/build",
+  "command": "/usr/bin/g++   -g -std=gnu++17 -O3 -march=native -fopenmp -o CMakeFiles/au4level.dir/src/main.cpp.o -c /home/vboxuser/path/to/au4level/src/main.cpp",
+  "file": "/home/vboxuser/path/to/au4level/src/main.cpp",
+  "output": "CMakeFiles/au4level.dir/src/main.cpp.o"
+}
+]

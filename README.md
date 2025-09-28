@@ -26,8 +26,7 @@ $$ \psi_{100}(r, \theta, \varphi) = R_{10}(r) \cdot Y_{00}(\theta, \varphi) = \f
 对于能够使用少能级模型的氦原子，本次模拟仅仅包含到三个能级，其中我们将基态的能量设为0，讲另外的两个态分别设为65.28eV,63.73eV,其中63.73eV的态并不是因为他是一个真实的态，而是当处于这种情况下，双激发态恰好与其共振发生AT分裂。
 由于我们仅仅使用三个能级，因此我们可以直接使用薛定谔方程的矩阵形式来进行计算。
 
-        ![替代文字](https://github.com/Zhangjie769/few-level-absorb-spectrum/blob/main/au4level/image/few-level.png)
-
+![替代文字](https://https://github.com/Zhangjie769/few-level-absorb-spectrum/tree/main/au4level/image/few-level.png)
 在少能级模型里面，我们需要计算波函数的时间演化，即薛定谔方程，他并不能通过解析形式直接计算出来，我们需要用每一步经过很小时间短的时间步长来进行计算。对于少能级模型，我们可以直接使用矩阵的形式来进行计算。
 在量子力学中，演化函数即含时哈密顿量包括动量与势能项，而动量算子需要波函数在动量空间中进行计算，势能项中的势能算子则需要在位置空间中进行计算，因此我们需要使用傅里叶变换来进行动量空间与位置空间的转换。
 又由于这仅仅是单个步长的时间就需要进行两次傅里叶变换，因此通常而言这些算法的时间复杂度都是很高的，特别是涉及到三维空间的计算以及多个电子的计算，目前仍然是一个非常困难的难题，
@@ -39,7 +38,7 @@ $$ \psi_{100}(r, \theta, \varphi) = R_{10}(r) \cdot Y_{00}(\theta, \varphi) = \f
 则基本上目前是无法制作出来的。因此这种相互作用造成的亚稳态可能会导致很多现象，一种就是导致电子的电离，另一种就是电子的跃迁，我们本次代码写的主要是电子的吸收光谱，也就是最终还是测量光的状态来反应原子的能量吸收情况，不直接测量电子，因此更多反应的是原子内部的
 能级跃迁情况。
 
-![替代文字](https://github.com/Zhangjie769/few-level-absorb-spectrum/blob/main/au4level/image/potential.png)
+![替代文字](https://https://github.com/Zhangjie769/few-level-absorb-spectrum/tree/main/au4level/image/poential.png)
 
 ### 3.瞬态吸收吸收光谱的计算
 吸收光谱的测量是一种全光式的测量，由于这种方式不直接测量电子的状态，也不会破坏电子的状态，并且测量光的频谱是目前技术手段比较成熟的，相对于电子的测量。
@@ -49,7 +48,8 @@ $$ \psi_{100}(r, \theta, \varphi) = R_{10}(r) \cdot Y_{00}(\theta, \varphi) = \f
 原子激发到一个激发态上，然后飞秒激光则会与之相互作用，从而使得原子的能级发生变化，从而使得吸收光谱发生变化。我们将飞秒激光与阿秒激光之间做出一个延时效应，在这个延时下阿秒激光相当于“扫描”了一遍
 在飞秒激光缀饰下的原子电子，从而可以“近似”的认为阿秒瞬态吸收光谱是可以在阿秒尺度内反应原子的亚稳态变化，通过模拟这种结构可以进一步理解原子内部的变化，还可以已通过这种方式耿佳佳进一步加深
 吸收光谱的理解。通过这种全光的测量方式，说不定以后就能制成越来越廉价的原子内部结构测量仪器。
-![替代文字](https://github.com/Zhangjie769/few-level-absorb-spectrum/blob/main/au4level/image/PPpacket.png)
+
+![替代文字](https://https://github.com/Zhangjie769/few-level-absorb-spectrum/tree/main/au4level/image/PPpacket.png)
 
 ## 代码说明
 ### 1.代码结构
@@ -97,22 +97,26 @@ rk4_utils.h:在本次计算的过程中，由于使用的微分时间步长的�
 
 ### 2. 含时哈密顿量与场耦合
 
-- 基于能量表象（希尔伯特空间）构造 \(H(t)\)：
-  \[
-  H(t) = 
+- 基于能量表象（希尔伯特空间）构造 \( H(t) \)：
+
+  $$
+  H(t) =
   \begin{bmatrix}
-  E_g & -\mu_{g1}E(t) & -\mu_{g2}E(t) \\
-  -\mu_{g1}E(t) & E_{e_1} & -\mu_{12}E(t) \\
-  -\mu_{g2}E(t) & -\mu_{12}E(t) & E_{e_2}
+  E_g & -\mu_{g1} E(t) & -\mu_{g2} E(t) \\
+  -\mu_{g1} E(t) & E_{e_1} & -\mu_{12} E(t) \\
+  -\mu_{g2} E(t) & -\mu_{12} E(t) & E_{e_2}
   \end{bmatrix}
-  \]
-- 电场 \(E(t)\) 为 XUV 与 NIR 的叠加，可选相位/CEP：
-  \[
-  E(t) = E_{xuv}(t-\Delta t) + E_{nir}(t)
-  \]
+  $$
+
+- 电场 \( E(t) \) 为 XUV 与 NIR 的叠加，可选相位 / CEP：
+
+  $$
+  E(t) = E_{\mathrm{xuv}}\bigl(t-\Delta t\bigr) + E_{\mathrm{nir}}(t)
+  $$
+
   其中每项均为高斯包络 \(\times\) 余弦载波。
 
-- **斯塔克效应/AT 分裂**：通过 \(E(t)\) 时变项自然产生能级的瞬时移动与分裂；无需显式加“经验项”。
+- **斯塔克效应 / AT 分裂**：通过 \( E(t) \) 的时变项自然产生能级的瞬时移动与分裂。
 
 
 ### 3. FFTW 封装与频谱生成
@@ -124,52 +128,9 @@ rk4_utils.h:在本次计算的过程中，由于使用的微分时间步长的�
   - 预分配输入/输出缓冲，减少多次计划的开销。
 ```
 
-**高斯卷积**（`fft_utils.h`）：在频域乘以 \(\exp(-(\omega-\omega_0)^2/2\sigma^2)\)，模拟仪器展宽。
 
 
-### 5. I/O 与复现：模板化输出 + 结构化结果
 
-- `io_utils.h` 提供模板化的 `dump_array/dump_matrix`，支持 `std::vector<T>`、`Eigen`、复数类型。
-- 输出文件：
-  - `states.csv`：各能级占据随时间/延时的演化；
-  - `spectrum.csv`：频谱与吸收强度；
-  - `params.json`：完整参数快照（保证**可复现**）。
-- Python 侧 `plot_all.py` 只依赖 `matplotlib`（或 `matplotlib` + `numpy`），一键生成曲线和热图。
 
-> **工程亮点**：结果、参数、图像**分层输出**，符合“可复现实验”的要求。
 
----
-
-### 6. 复杂一点但必要：稳定性与验证
-
-- **单步收敛检查**：在 `--check` 模式下，自动把 `dt` 减半对比两次结果差异；超过阈值则提示调参。
-- **能量一致性**（无场时）：检查 \(||\Psi||^2\) 与对角化 \(H\) 的一致性，作为 sanity check。
-- **边界条件**：长时间窗仿真时对脉冲尾部做窗函数，避免频谱泄漏。
-
----
-
-### 7. 性能与可扩展性
-
-- 关键循环避免临时对象，尽量用 `reserve`。
-- 可选 `-O3 -march=native`；若矩阵更大可切到 `Eigen` 并用 `noalias()` 优化乘法。
-- 预留接口从 3 能级拓展到 \(N\) 能级：把 `Vec3` 替换为 `std::vector<cplx>`，`Hmul` 改为稀疏/稠密乘法。
-
----
-
-### 8. 构建与运行（工程化）
-
-- **依赖**：`FFTW3`、`CMake>=3.16`、`g++>=9`
-- **构建**：
-  ```bash
-  mkdir build && cd build
-  cmake -DCMAKE_BUILD_TYPE=Release ..
-  make -j
-  ```
-- **运行**：
-  ```bash
-  ./au4level --dt 1e-3 --E0 0.05 --delay-start -20 --delay-end 20 --delay-step 0.5
-  python3 ../scripts/plot_all.py ./out
-  ```
-
----
 

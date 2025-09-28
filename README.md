@@ -114,9 +114,9 @@ E_g & -\mu_{g1} E(t) & -\mu_{g2} E(t) \\
 \end{bmatrix}
 ```
 - **电场 \(E(t)\) 为 XUV 与 NIR 的叠加，可选相位 / CEP：**
-
+```
   E(t) = E_{\mathrm{xuv}}\!\bigl(t-\Delta t\bigr) + E_{\mathrm{nir}}(t)
-
+```
   其中每项均为高斯包络 \(\times\) 余弦载波。
 
 - **斯塔克效应 / AT 分裂：**  
@@ -130,7 +130,25 @@ E_g & -\mu_{g1} E(t) & -\mu_{g2} E(t) \\
 - 在 `fft_backend.h` 中封装复数 1D FFT：
   - RAII 管理 `fftw_plan`，避免泄漏；
   - 预分配输入/输出缓冲，减少多次计划的开销。
+
+
+项目命令：
+```terminal
+mkdir build
+cd build
+cmake ..
+make -j
 ```
+运行项目：
+```terminal
+./au4level
+```
+画图：
+```terminal
+python3 plot_all.py
+```
+
+
 
 
 

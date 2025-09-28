@@ -38,7 +38,7 @@ $$ \psi_{100}(r, \theta, \varphi) = R_{10}(r) \cdot Y_{00}(\theta, \varphi) = \f
 则基本上目前是无法制作出来的。因此这种相互作用造成的亚稳态可能会导致很多现象，一种就是导致电子的电离，另一种就是电子的跃迁，我们本次代码写的主要是电子的吸收光谱，也就是最终还是测量光的状态来反应原子的能量吸收情况，不直接测量电子，因此更多反应的是原子内部的
 能级跃迁情况。
 
-![替代文字](./au4level/image/poential.png)
+![替代文字](./au4level/image/potential.png)
 
 ### 3.瞬态吸收吸收光谱的计算
 吸收光谱的测量是一种全光式的测量，由于这种方式不直接测量电子的状态，也不会破坏电子的状态，并且测量光的频谱是目前技术手段比较成熟的，相对于电子的测量。
@@ -101,20 +101,21 @@ rk4_utils.h:在本次计算的过程中，由于使用的微分时间步长的�
 
 - **基于能量表象（希尔伯特空间）构造 \(H(t)\)：**
 
-  $$
-  H(t) =
-  \begin{bmatrix}
-  E_g & -\mu_{g1}E(t) & -\mu_{g2}E(t) \\
-  -\mu_{g1}E(t) & E_{e_1} & -\mu_{12}E(t) \\
-  -\mu_{g2}E(t) & -\mu_{12}E(t) & E_{e_2}
-  \end{bmatrix}
-  $$
+ ## 含时哈密顿量与场耦合
 
+- 基于能量表象（希尔伯特空间）构造 \(H(t)\)：
+
+```math
+H(t) =
+\begin{bmatrix}
+E_g & -\mu_{g1} E(t) & -\mu_{g2} E(t) \\
+-\mu_{g1} E(t) & E_{e_1} & -\mu_{12} E(t) \\
+-\mu_{g2} E(t) & -\mu_{12} E(t) & E_{e_2}
+\end{bmatrix}
+```
 - **电场 \(E(t)\) 为 XUV 与 NIR 的叠加，可选相位 / CEP：**
 
-  $$
-  E(t) = E_{\mathrm{xuv}}\bigl(t-\Delta t\bigr) + E_{\mathrm{nir}}(t)
-  $$
+  E(t) = E_{\mathrm{xuv}}\!\bigl(t-\Delta t\bigr) + E_{\mathrm{nir}}(t)
 
   其中每项均为高斯包络 \(\times\) 余弦载波。
 
